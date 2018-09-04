@@ -3,11 +3,13 @@ package com.example.blog.controller;
 import com.example.blog.dto.UserDto;
 import com.example.blog.model.Post;
 import com.example.blog.model.User;
-import com.example.blog.service.PostService;
-import com.example.blog.service.UserService;
+import com.example.blog.service.api.PostService;
+import com.example.blog.service.api.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,7 +46,9 @@ public class UserController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto create(@RequestBody UserDto user) {
-        return poToDto(userService.create(dtoToPo(user)));
+        User po = dtoToPo(user);
+        userService.create(po);
+        return poToDto(po);
     }
 
     @DeleteMapping("/{id}")

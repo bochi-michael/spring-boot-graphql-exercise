@@ -3,7 +3,7 @@ package com.example.blog.graphql;
 import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.example.blog.model.Post;
 import com.example.blog.model.User;
-import com.example.blog.service.PostService;
+import com.example.blog.service.api.PostService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

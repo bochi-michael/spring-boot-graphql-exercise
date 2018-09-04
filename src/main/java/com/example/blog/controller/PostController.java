@@ -2,7 +2,7 @@ package com.example.blog.controller;
 
 import com.example.blog.dto.PostDto;
 import com.example.blog.model.Post;
-import com.example.blog.service.PostService;
+import com.example.blog.service.api.PostService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,8 +46,9 @@ public class PostController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PostDto create(@RequestBody PostDto post) {
-        return poToDto(
-                postService.create(dtoToPo(post)));
+        Post po = dtoToPo(post);
+        postService.create(po);
+        return poToDto(po);
     }
 
     @DeleteMapping("/{id}")
